@@ -19,7 +19,7 @@
 
 - name: Delete node
   command: "{{ bin_dir }}/kubectl delete node {{ inventory_hostname }}"
-  delegate_to: "{{ groups['kube-master']|first }}"
+  delegate_to: "{{ groups['kube-master']|difference([inventory_hostname])|first }}"
   ignore_errors: yes
 
 - name: Lookup etcd member id
